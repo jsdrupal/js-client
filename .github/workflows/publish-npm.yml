@@ -16,5 +16,4 @@ jobs:
       - run: yarn workspace @jsdrupal/client build
       - run: yarn ci
       - run: echo "registry=https://npm.pkg.github.com/jsdrupal" >> .npmrc
-      - run: npm whoami
       - run: yarn workspace @drupal/client npm publish --access=public

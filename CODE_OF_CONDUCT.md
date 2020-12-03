@@ -7,7 +7,7 @@ This code of conduct is based on the one developed by Ubuntu, with the addition 
 
 Discussion about this policy belongs in the [Community Working Group](https://www.drupal.org/community/cwg)'s [issue tracker](https://www.drupal.org/project/issues/drupal_cwg).
 
-##Be considerate.
+## Be considerate.
 
 Our work will be used by other people, and we in turn will depend on the work of others. Any decision we take will affect users and colleagues, and we should take those consequences into account when making decisions. Drupal has millions of users and thousands of contributors. Even if it's not obvious at the time, our contributions to Drupal will impact the work of others. For example, changes to code, infrastructure, policy, documentation, and translations during a release may negatively impact others' work.
 

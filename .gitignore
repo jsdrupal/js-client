@@ -2,5 +2,6 @@
 .yarn/build-state.yml
 .yarn/unplugged
 
-# Build
-dist
+# Docs
+docs/.next
+docs/out

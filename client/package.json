@@ -4,7 +4,7 @@
   "scripts": {
     "build": "rimraf dist && rollup -c && mv dist/index.js index.js && rimraf dist",
     "eslint": "yarn g:eslint",
-    "eslintci": "yarn g:eslint -o ../reports/eslint/client.xml -f junit"
+    "eslintci": "yarn g:eslint -o ../reports/eslint/client.json -f json"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.0.0",

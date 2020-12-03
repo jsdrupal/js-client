@@ -15,5 +15,12 @@ jobs:
       - run: yarn
       - run: yarn workspace @drupal/client build
       - run: yarn ci
-      - run: yarn npm login --registry=https://npm.pkg.github.com --scope=@jsdrupal
+      - uses: actions/setup-node@v1
+        with:
+          always-auth: true
+          registry-url: https://npm.pkg.github.com
+          scope: '@jsdrupal'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn workspace @drupal/client npm login --publish --scope=@jsdrupal
       - run: yarn workspace @drupal/client npm publish --access=public

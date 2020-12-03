@@ -1,4 +1,4 @@
-const request = require('@drupal/client').request;
+const request = require('@jsdrupal/client').request;
 
 module.exports = async () => {
   const resp = await request({

@@ -118,42 +118,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@drupal/client@workspace:client":
-  version: 0.0.0-use.local
-  resolution: "@drupal/client@workspace:client"
-  dependencies:
-    "@rollup/plugin-typescript": ^8.0.0
-    "@types/node": ^14.14.10
-    "@types/node-fetch": ^2.5.7
-    "@typescript-eslint/eslint-plugin": ^4.9.0
-    "@typescript-eslint/parser": ^4.9.0
-    eslint: ^7.14.0
-    eslint-config-prettier: ^6.15.0
-    eslint-plugin-prettier: ^3.2.0
-    node-fetch: ^2.6.1
-    prettier: ^2.2.1
-    rimraf: ^3.0.2
-    rollup: ^2.34.0
-    tslib: ^2.0.3
-    typescript: ^4.1.2
-  languageName: unknown
-  linkType: soft
-
-"@drupal/js-client@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@drupal/js-client@workspace:."
-  dependencies:
-    "@typescript-eslint/eslint-plugin": ^4.9.0
-    "@typescript-eslint/parser": ^4.9.0
-    eslint: ^7.14.0
-    eslint-config-prettier: ^6.15.0
-    eslint-plugin-prettier: ^3.2.0
-    prettier: ^2.2.1
-    rimraf: ^3.0.2
-    typescript: ^4.1.2
-  languageName: unknown
-  linkType: soft
-
 "@eslint/eslintrc@npm:^0.2.1":
   version: 0.2.1
   resolution: "@eslint/eslintrc@npm:0.2.1"
@@ -197,6 +161,42 @@ __metadata:
   checksum: c77ac8f0c1ae6e21b3d77fa63f462dc1b0c84481388f5e54c651e86cf565d58cb701c396a1fa86a746d5dc278013ad5b3513a58c4cb19a493802d17b68c90740
   languageName: node
   linkType: hard
+
+"@jsdrupal/client@workspace:client":
+  version: 0.0.0-use.local
+  resolution: "@jsdrupal/client@workspace:client"
+  dependencies:
+    "@rollup/plugin-typescript": ^8.0.0
+    "@types/node": ^14.14.10
+    "@types/node-fetch": ^2.5.7
+    "@typescript-eslint/eslint-plugin": ^4.9.0
+    "@typescript-eslint/parser": ^4.9.0
+    eslint: ^7.14.0
+    eslint-config-prettier: ^6.15.0
+    eslint-plugin-prettier: ^3.2.0
+    node-fetch: ^2.6.1
+    prettier: ^2.2.1
+    rimraf: ^3.0.2
+    rollup: ^2.34.0
+    tslib: ^2.0.3
+    typescript: ^4.1.2
+  languageName: unknown
+  linkType: soft
+
+"@jsdrupal/js-client@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@jsdrupal/js-client@workspace:."
+  dependencies:
+    "@typescript-eslint/eslint-plugin": ^4.9.0
+    "@typescript-eslint/parser": ^4.9.0
+    eslint: ^7.14.0
+    eslint-config-prettier: ^6.15.0
+    eslint-plugin-prettier: ^3.2.0
+    prettier: ^2.2.1
+    rimraf: ^3.0.2
+    typescript: ^4.1.2
+  languageName: unknown
+  linkType: soft
 
 "@next/env@npm:10.0.3":
   version: 10.0.3
@@ -2858,7 +2858,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "example-node@workspace:example-node"
   dependencies:
-    "@drupal/client": "workspace:client"
+    "@jsdrupal/client": "workspace:client"
     eslint: ^7.14.0
     eslint-config-prettier: ^6.15.0
     eslint-plugin-prettier: ^3.2.0

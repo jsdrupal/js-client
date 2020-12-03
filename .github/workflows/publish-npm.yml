@@ -1,0 +1,18 @@
+name: Publish to npm
+on:
+  push:
+    tags:
+      - v[0-9].[0-9]+.[0-9]+
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: yarn
+      - run: yarn workspace @jsdrupal/client build
+      - run: yarn ci
+      - run: |
+          echo "npmAuthToken: \"${{ secrets.GITHUB_TOKEN }}\"" >> .yarnrc.yml
+      - run: yarn workspace @jsdrupal/client npm publish --access=public

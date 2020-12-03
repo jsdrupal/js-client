@@ -1,6 +1,8 @@
 {
-  "name": "@drupal/client",
+  "name": "@jsdrupal/client",
+  "version": "0.0.1",
   "main": "index.js",
+  "repository": "git://github.com/jsdrupal/js-client.git",
   "scripts": {
     "build": "rimraf dist && rollup -c && mv dist/index.js index.js && rimraf dist",
     "eslint": "yarn g:eslint",

@@ -8,10 +8,6 @@
     "eslint": "yarn g:eslint",
     "eslintci": "yarn g:eslint -o ../reports/eslint/client.json -f json"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com"
-  },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.0.0",
     "@types/node": "^14.14.10",

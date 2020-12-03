@@ -15,4 +15,6 @@ jobs:
       - run: yarn
       - run: yarn workspace @jsdrupal/client build
       - run: yarn ci
+      - run: |
+          echo "npmAuthToken: \"${{ secrets.GITHUB_TOKEN }}\"" >> .yarnrc.yml
       - run: yarn workspace @jsdrupal/client npm publish --access=public

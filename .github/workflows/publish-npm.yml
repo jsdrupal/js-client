@@ -1,0 +1,24 @@
+name: Publish to npm
+on:
+  push:
+    tags:
+      - v[0-9].[0-9]+.[0-9]+
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: yarn
+      - run: yarn workspace @drupal/client build
+      - run: yarn ci
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          registry: https://npm.pkg.github.com
+          package: ./client/package.json
+          access: public
+          dry-run: true

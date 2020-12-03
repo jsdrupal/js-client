@@ -1,5 +1,5 @@
 {
-  "name": "@drupal/client",
+  "name": "@jsdrupal/client",
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {

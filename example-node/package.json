@@ -10,7 +10,7 @@
     "eslintci": "yarn g:eslint -o ../reports/eslint/example-node.json -f json"
   },
   "dependencies": {
-    "@drupal/client": "workspace:client",
+    "@jsdrupal/client": "workspace:client",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.2.0",

@@ -6,7 +6,8 @@ This is a starter repository for the decoupled menus initiative. Not accepting p
 
 ### client
 
-This is the client that would ship to npm. Run `yarn build` to generate it at `client/index.js`
+This is the client that would ship to npm. Run `yarn build` to generate it at `client/index.js`.
+Currently this is being automatically published to the GitHub npm package registry when you create a release (because we can delete it from GitHub, unlike npm :) ).
 
 ### docs
 

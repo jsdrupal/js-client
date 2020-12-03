@@ -13,12 +13,13 @@ jobs:
       - uses: actions/setup-node@v1
       - run: yarn
       - run: yarn ci
-      - name: Report jUnit Annotations as Github Actions Annotations
-        uses: shyim/junit-report-annotations-action@0.2.0
+      - run: jq -s '[.[][]]' reports/eslint/*.json > reports/eslint.json
+      - name: Annotate Code Linting Results
+        uses: ataylorme/eslint-annotate-action@1.1.2
         if: always()
         with:
-          path: 'reports/eslint/*.xml'
-          accessToken: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          report-json: "reports/eslint/eslint.json"
       - name: Upload test artifacts
         if: always()
         uses: actions/upload-artifact@v2

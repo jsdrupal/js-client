@@ -7,7 +7,7 @@
   "scripts": {
     "start": "micro-dev",
     "eslint": "yarn g:eslint",
-    "eslintci": "yarn g:eslint -o ../reports/eslint/example-node.xml -f junit"
+    "eslintci": "yarn g:eslint -o ../reports/eslint/example-node.json -f json"
   },
   "dependencies": {
     "@drupal/client": "workspace:client",

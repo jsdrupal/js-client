@@ -4,7 +4,7 @@ on:
     branches:
       - 'main'
 jobs:
-  check-bats-version:
+  push-to-gh-pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

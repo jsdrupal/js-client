@@ -22,5 +22,4 @@ jobs:
           scope: '@jsdrupal'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: yarn workspace @drupal/client npm login --publish --scope=@jsdrupal
       - run: yarn workspace @drupal/client npm publish --access=public

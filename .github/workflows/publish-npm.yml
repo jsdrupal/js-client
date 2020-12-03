@@ -15,10 +15,5 @@ jobs:
       - run: yarn
       - run: yarn workspace @drupal/client build
       - run: yarn ci
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          registry: https://npm.pkg.github.com
-          package: ./client/package.json
-          access: public
-          dry-run: true
+      - run: yarn npm login --registry=https://npm.pkg.github.com --scope=@jsdrupal
+      - run: yarn workspace @drupal/client npm publish --access=public

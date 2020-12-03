@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v1
       - run: yarn
       - run: yarn ci
-      - run: jq -s '[.[][]]' reports/eslint/*.json > reports/eslint-combined.json
+      - run: jq -s '[.[][]]' reports/eslint/*.json > reports/eslint/eslint-combined.json
         if: ${{ failure() }}
       - name: Annotate Code Linting Results
         uses: ataylorme/eslint-annotate-action@1.1.2

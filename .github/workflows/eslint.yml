@@ -13,15 +13,15 @@ jobs:
       - uses: actions/setup-node@v1
       - run: yarn
       - run: yarn ci
-      - run: jq -s '[.[][]]' reports/eslint/*.json > reports/eslint.json
+      - run: jq -s '[.[][]]' reports/eslint/*.json > reports/eslint-combined.json
       - name: Annotate Code Linting Results
         uses: ataylorme/eslint-annotate-action@1.1.2
-        if: always()
+        if: ${{ failure() }}
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          report-json: "reports/eslint/eslint.json"
+          report-json: reports/eslint/eslint-combined.json
       - name: Upload test artifacts
-        if: always()
+        if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
           name: eslint_test_results

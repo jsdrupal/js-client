@@ -1,0 +1,6 @@
+# Yarn
+.yarn/build-state.yml
+.yarn/unplugged
+
+# Build
+dist

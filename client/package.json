@@ -1,8 +1,10 @@
 {
-  "name": "src",
+  "name": "@drupal/client",
+  "main": "index.js",
   "scripts": {
-    "build": "rimraf build && rollup -c",
-    "eslint": "eslint . --max-warnings=0 --no-eslintrc --ignore-path ../.gitignore -c package.json"
+    "build": "rimraf dist && rollup -c && mv dist/index.js index.js && rimraf dist",
+    "eslint": "yarn g:eslint",
+    "eslintci": "yarn g:eslint -o ../reports/eslint/client.xml -f junit"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.0.0",
@@ -32,25 +34,10 @@
     ],
     "parserOptions": {
       "ecmaVersion": "2018",
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
-      }
+      "sourceType": "module"
     },
     "rules": {
       "prettier/prettier": "error"
-    },
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
     }
-  },
-  "prettier": {
-    "printWidth": 120,
-    "semi": true,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "all"
   }
 }

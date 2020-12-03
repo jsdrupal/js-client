@@ -5,17 +5,18 @@ async function request({
   base = null,
   requestMethod = 'GET',
   entity = 'node',
-  bundle = null,
 }: {
   base: string;
   requestMethod: JsonApiRequestMethod;
   entity: string;
-  bundle: string;
-}): JsonApiResponse {
-  if (!bundle) {
-    bundle = entity;
+  bundle?: string;
+}): Promise<JsonApiResponse> {
+  // Strip trailing slash from the base URL.
+  if (base.substr(-1) === '/') {
+    base = base.substr(0, base.length - 1);
   }
-  const response = await fetch(`${base}/jsonapi/${entity}/${bundle}`, {
+
+  const response = await fetch(`${base}/${entity}`, {
     method: requestMethod,
   });
   const json: JsonApiResponse = await response.json();

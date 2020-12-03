@@ -3,13 +3,23 @@
   "private": true,
   "workspaces": [
     "docs",
-    "src"
+    "client",
+    "example-node"
   ],
   "scripts": {
+    "build": "yarn workspaces foreach run build",
     "eslint": "yarn workspaces foreach run eslint",
-    "build": "yarn workspacs foreach run build"
+    "g:eslint": "cd $INIT_CWD && eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0 --no-eslintrc --ignore-path=.gitignore -c package.json",
+    "ci": "rimraf reports/eslint && yarn workspaces foreach run eslintci"
   },
-  "dependencies": {
-    "node-fetch": "^2.6.1"
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.2.0",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.1.2"
   }
 }

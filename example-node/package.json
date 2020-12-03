@@ -1,0 +1,37 @@
+{
+  "name": "example-node",
+  "main": "index.js",
+  "engines": {
+    "node": ">=13"
+  },
+  "scripts": {
+    "start": "micro-dev",
+    "eslint": "yarn g:eslint",
+    "eslintci": "yarn g:eslint -o ../reports/eslint/example-node.xml -f junit"
+  },
+  "dependencies": {
+    "@drupal/client": "workspace:client",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.2.0",
+    "micro": "^9.3.4",
+    "micro-dev": "^3.0.0",
+    "prettier": "^2.2.1"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": "2018",
+      "sourceType": "module"
+    },
+    "rules": {
+      "prettier/prettier": "error"
+    }
+  }
+}

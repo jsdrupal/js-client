@@ -1,7 +1,7 @@
 # Yarn
-.yarn/build-state.yml
-.yarn/unplugged
-
-# Docs
-docs/.next
-docs/out
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions

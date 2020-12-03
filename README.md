@@ -11,7 +11,7 @@ Currently this is being automatically published to the GitHub npm package regist
 
 ### docs
 
-Next.js Docs site that's auto deployed to https://jsdrupal.github.io/js-client/
+Next.js Docs site that's auto deployed to https://jsdrupal.justa.fish/
 
 ### example-node
 

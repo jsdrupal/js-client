@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: git push https://justafish:${{ secrets.DRUPAL_ORG_GIT_PASSWORD }}@https://git.drupalcode.org/sandbox/justafish-3186221.git main
+      - run: git push https://justafish:${{ secrets.DRUPAL_ORG_GIT_PASSWORD }}@git.drupalcode.org/sandbox/justafish-3186221.git main
 
 
 

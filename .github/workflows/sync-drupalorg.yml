@@ -7,11 +7,11 @@ jobs:
   push-to-drupalorg:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: webfactory/ssh-agent@v0.4.1
+      - uses: wearerequired/git-mirror-action@v1
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DRUPAL_RG_KEY }}
         with:
-          ssh-private-key: ${{ secrets.DRUPAL_ORG_KEY }}
-      - run: git remote add drupal git@git.drupal.org:sandbox/justafish-3186221.git
-      - run: git push drupal main
+          source-repo: git@github.com:jsdrupal/js-client.git
+          destination-repo: git@git.drupal.org:sandbox/justafish-3186221.git
 
 

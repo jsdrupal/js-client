@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: git push https://justafish:${{ secrets.DRUPALORG_GIT_PASSWORD }}@git.drupal.org:sandbox/justafish-3186221.git main
+      - uses: webfactory/ssh-agent@v0.4.1
+          with:
+            ssh-private-key: ${{ secrets.DRUPAL_ORG_KEY }}
+      - run: git push origin main
 
 

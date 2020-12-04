@@ -1,4 +1,7 @@
 # js-client
+![Sync git to drupal.org](https://github.com/jsdrupal/js-client/workflows/Sync%20git%20to%20drupal.org/badge.svg)
+![CodeQL](https://github.com/jsdrupal/js-client/workflows/CodeQL/badge.svg)
+
 
 This is a starter repository for the decoupled menus initiative. Not accepting pull requests currently as this will probably move to drupal.org.
 

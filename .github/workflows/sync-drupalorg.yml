@@ -1,0 +1,13 @@
+name: Sync git to drupal.org
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  push-to-drupalorg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: git push https://justafish:{{ secrets.DRUPALORG_GIT_PASSWORD }}@git.drupal.org:sandbox/justafish-3186221.git main
+
+

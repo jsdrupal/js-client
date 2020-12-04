@@ -8,11 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: mirror-repository
-        uses: spyoungtech/mirror-action@v0.4.3
-        with:
-          REMOTE: git@git.drupal.org:sandbox/justafish-3186221.git
-          GIT_SSH_PRIVATE_KEY: ${{ secrets.DRUPAL_ORG_KEY }}
-          GIT_SSH_KNOWN_HOSTS: ${{ secrets.DRUPAL_ORG_KNOWN_HOSTS }}
+      - run: git push https://justafish:${{ secrets.DRUPAL_ORG_GIT_PASSWORD }}@https://git.drupalcode.org/sandbox/justafish-3186221.git main
+
 
 

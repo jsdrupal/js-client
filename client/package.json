@@ -9,18 +9,18 @@
     "eslintci": "yarn g:eslint -o ../reports/eslint/client.json -f json"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.0.0",
-    "@types/node": "^14.14.10",
-    "@types/node-fetch": "^2.5.7",
-    "@typescript-eslint/eslint-plugin": "^4.9.0",
-    "@typescript-eslint/parser": "^4.9.0",
-    "eslint": "^7.14.0",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-prettier": "^3.2.0",
+    "@rollup/plugin-typescript": "^8.2.0",
+    "@types/node": "^14.14.31",
+    "@types/node-fetch": "^2.5.8",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.34.0",
-    "tslib": "^2.0.3",
+    "rollup": "^2.40.0",
+    "tslib": "^2.1.0",
     "typescript": "^4.1.2"
   },
   "dependencies": {

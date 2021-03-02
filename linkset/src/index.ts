@@ -1,13 +1,13 @@
 type NormalizedTargetObject = {
   href: string;
 } & {
-  [key: string]: string | any[];
+  [attribute: string]: string | any[];
 }
 
 type NormalizedContextObject = {
   anchor: string;
 } & {
-  [key: string]: NormalizedTargetObject[];
+  [rel: string]: NormalizedTargetObject[];
 };
 
 type NormalizedLinkset = {

@@ -1,17 +1,17 @@
-type rawTargetObject = {
+type NormalizedTargetObject = {
   href: string;
 } & {
   [key: string]: string | any[];
 }
 
-type rawContextObject = {
+type NormalizedContextObject = {
   anchor: string;
 } & {
-  [key: string]: rawTargetObject[];
+  [key: string]: NormalizedTargetObject[];
 };
 
-type rawLinkset = {
-  linkset: rawContextObject[];
+type NormalizedLinkset = {
+  linkset: NormalizedContextObject[];
 }
 
 interface LinkInterface {
@@ -45,27 +45,36 @@ class Link implements LinkInterface {
 
 class Linkset implements LinksetInterface {
   public elements: LinkInterface[];
-  constructor(input: string | rawLinkset) {
-    let setObject: rawLinkset;
-    if (typeof input === 'string') {
-      setObject = JSON.parse(input);
-    }
-    else {
-      setObject = input;
-    }
-    const elements = [];
-    setObject.linkset.forEach((contextObject) => {
-      const { anchor, ...rels } = contextObject;
-      Object.entries(rels).forEach(([rel, targetObjects]) => {
-        targetObjects.forEach((targetObject) => {
-          elements.push(new Link({anchor, rel, ...targetObject}));
-        });
-      })
-    });
-    this.elements = elements;
+  constructor(links: LinkInterface[]) {
+    this.elements = links;
   }
 }
 
-export function fromJSON(input: string | rawLinkset): LinksetInterface {
-  return new Linkset(input);
+export function normalize(linkset: LinksetInterface): NormalizedLinkset {
+  const contexts: {
+    [anchor: string]: {
+      [rel: string]: object[]
+    }
+  } = {};
+  linkset.elements.forEach(({ anchor, rel, ...target }) => {
+    contexts[anchor][rel].push(target);
+  });
+  return {
+    linkset: Object.entries(contexts).reduce((carry, [anchor, rels]) => {
+      return [...carry, {anchor, ...rels}];
+    }, [])
+  };
+}
+
+export function denormalize(normalized: NormalizedLinkset): LinksetInterface {
+  const links = [];
+  normalized.linkset.forEach((contextObject) => {
+    const { anchor, ...rels } = contextObject;
+    Object.entries(rels).forEach(([rel, targetObjects]) => {
+      targetObjects.forEach((targetObject) => {
+        links.push(new Link({anchor, rel, ...targetObject}));
+      });
+    })
+  });
+  return new Linkset(links);
 }

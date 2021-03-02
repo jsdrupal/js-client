@@ -158,6 +158,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@jsdrupal/linkset@workspace:linkset":
+  version: 0.0.0-use.local
+  resolution: "@jsdrupal/linkset@workspace:linkset"
+  dependencies:
+    "@rollup/plugin-typescript": ^8.2.0
+    "@types/node": ^14.14.31
+    "@types/node-fetch": ^2.5.8
+    "@typescript-eslint/eslint-plugin": ^4.15.2
+    "@typescript-eslint/parser": ^4.15.2
+    eslint: ^7.21.0
+    eslint-config-prettier: ^8.1.0
+    eslint-plugin-prettier: ^3.3.1
+    prettier: ^2.2.1
+    rimraf: ^3.0.2
+    rollup: ^2.40.0
+    tslib: ^2.1.0
+    typescript: ^4.1.2
+  languageName: unknown
+  linkType: soft
+
 "@next/env@npm:10.0.7":
   version: 10.0.7
   resolution: "@next/env@npm:10.0.7"
@@ -331,7 +351,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^4.16.1":
+"@typescript-eslint/eslint-plugin@npm:^4.15.2, @typescript-eslint/eslint-plugin@npm:^4.16.1":
   version: 4.16.1
   resolution: "@typescript-eslint/eslint-plugin@npm:4.16.1"
   dependencies:
@@ -369,7 +389,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^4.16.1":
+"@typescript-eslint/parser@npm:^4.15.2, @typescript-eslint/parser@npm:^4.16.1":
   version: 4.16.1
   resolution: "@typescript-eslint/parser@npm:4.16.1"
   dependencies:

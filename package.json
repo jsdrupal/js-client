@@ -4,6 +4,7 @@
   "workspaces": [
     "docs",
     "client",
+    "linkset",
     "example-node"
   ],
   "scripts": {

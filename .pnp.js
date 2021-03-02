@@ -33,6 +33,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {
         "name": "example-node",
         "reference": "workspace:example-node"
+      },
+      {
+        "name": "@jsdrupal/linkset",
+        "reference": "workspace:linkset"
       }
     ],
     "enableTopLevelFallback": true,
@@ -40,6 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "fallbackExclusionList": [
       ["@jsdrupal/client", ["workspace:client"]],
       ["@jsdrupal/js-client", ["workspace:."]],
+      ["@jsdrupal/linkset", ["workspace:linkset"]],
       ["docs", ["workspace:docs"]],
       ["example-node", ["workspace:example-node"]]
     ],
@@ -227,6 +232,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:d756977db553a841b70157b9be2bd6aafb449b770fa71adb431b9fca8bf7ff5d458d1f6dfc902c8863eed751f38cbf3fbefbedbc6e433f471e9f3e660ec0cb04#npm:3.3.1"],
             ["prettier", "npm:2.2.1"],
             ["rimraf", "npm:3.0.2"],
+            ["typescript", "patch:typescript@npm%3A4.1.2#builtin<compat/typescript>::version=4.1.2&hash=cc6730"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
+      ["@jsdrupal/linkset", [
+        ["workspace:linkset", {
+          "packageLocation": "./linkset/",
+          "packageDependencies": [
+            ["@jsdrupal/linkset", "workspace:linkset"],
+            ["@rollup/plugin-typescript", "virtual:94b11a1fc29554af737560f19901308b20fec4c6ce34a1898cc3550d0ed59df61977acbcdca9ef9ce9d354690c88abec43dbe6ed8fb59878ba9b9ea60d3df71a#npm:8.2.0"],
+            ["@types/node", "npm:14.14.31"],
+            ["@types/node-fetch", "npm:2.5.8"],
+            ["@typescript-eslint/eslint-plugin", "virtual:d756977db553a841b70157b9be2bd6aafb449b770fa71adb431b9fca8bf7ff5d458d1f6dfc902c8863eed751f38cbf3fbefbedbc6e433f471e9f3e660ec0cb04#npm:4.16.1"],
+            ["@typescript-eslint/parser", "virtual:d756977db553a841b70157b9be2bd6aafb449b770fa71adb431b9fca8bf7ff5d458d1f6dfc902c8863eed751f38cbf3fbefbedbc6e433f471e9f3e660ec0cb04#npm:4.16.1"],
+            ["eslint", "npm:7.21.0"],
+            ["eslint-config-prettier", "virtual:d756977db553a841b70157b9be2bd6aafb449b770fa71adb431b9fca8bf7ff5d458d1f6dfc902c8863eed751f38cbf3fbefbedbc6e433f471e9f3e660ec0cb04#npm:8.1.0"],
+            ["eslint-plugin-prettier", "virtual:d756977db553a841b70157b9be2bd6aafb449b770fa71adb431b9fca8bf7ff5d458d1f6dfc902c8863eed751f38cbf3fbefbedbc6e433f471e9f3e660ec0cb04#npm:3.3.1"],
+            ["prettier", "npm:2.2.1"],
+            ["rimraf", "npm:3.0.2"],
+            ["rollup", "npm:2.40.0"],
+            ["tslib", "npm:2.1.0"],
             ["typescript", "patch:typescript@npm%3A4.1.2#builtin<compat/typescript>::version=4.1.2&hash=cc6730"]
           ],
           "linkType": "SOFT",

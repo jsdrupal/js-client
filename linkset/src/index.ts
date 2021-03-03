@@ -7,7 +7,7 @@ type RegisteredTargetAttributes = {
     value: string;
     language?: string;
   }[];
-}
+};
 
 type ExtensionTargetAttributes = {
   [attribute: string]: string | any[];

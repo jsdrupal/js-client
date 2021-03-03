@@ -1,23 +1,23 @@
-type RegisteredTargetAttributes = {
+type InternationalizedValue = {
+  value: string;
+  language?: string;
+}
+
+interface TargetAttributes {
+  [name: string]: string | string[] | InternationalizedValue[];
+}
+
+interface RegisteredTargetAttributes extends TargetAttributes {
   hreflang?: string[];
   media?: string;
   type?: string;
-  title?: string[];
-  'title*'?: {
-    value: string;
-    language?: string;
-  }[];
+  title?: string;
+  'title*'?: InternationalizedValue[];
 };
-
-type ExtensionTargetAttributes = {
-  [attribute: string]: string | any[];
-};
-
-type NormalizedTargetAttributes = RegisteredTargetAttributes & ExtensionTargetAttributes;
 
 type NormalizedTargetObject = {
   href: string;
-} & NormalizedTargetAttributes;
+} & TargetAttributes;
 
 type NormalizedContextObject = {
   anchor: string;
@@ -33,15 +33,7 @@ interface LinkInterface {
   anchor: string;
   rel: string;
   href: string;
-  attributes: {
-    hreflang?: string[];
-    media?: string;
-    type?: string;
-    title?: string;
-    'title*'?: string;
-  } & {
-    [name: string]: string | any[];
-  };
+  attributes: RegisteredTargetAttributes;
 }
 
 interface LinksetInterface {
@@ -53,9 +45,7 @@ class Link implements LinkInterface {
   public anchor: string;
   public rel: string;
   public href: string;
-  public attributes: {
-    [name: string]: string | any[];
-  };
+  public attributes: RegisteredTargetAttributes;
   constructor(parameters) {
     const { anchor, rel, href, ...attributes } = parameters;
     this.anchor = anchor;
@@ -78,16 +68,15 @@ class Linkset implements LinksetInterface {
 export function normalize(linkset: LinksetInterface): NormalizedLinkset {
   const contexts: {
     [anchor: string]: {
-      [rel: string]: object[];
+      [rel: string]: NormalizedTargetObject[];
     };
   } = {};
   linkset.elements.forEach(({ anchor, rel, ...target }) => {
-    if (!contexts.hasOwnProperty(anchor)) contexts[anchor] = {};
-    if (!contexts[anchor].hasOwnProperty(rel)) contexts[anchor][rel] = [];
-    contexts[anchor][rel].push({
-      href: target.href,
-      ...target.attributes,
-    });
+    if (!Object.hasOwnProperty.call(contexts, anchor)) contexts[anchor] = {};
+    if (!Object.hasOwnProperty.call(contexts[anchor], rel)) contexts[anchor][rel] = [];
+    const { href, attributes } = target;
+    const targetObject: NormalizedTargetObject = { href, ...attributes };
+    contexts[anchor][rel].push(targetObject);
   });
   return {
     linkset: Object.entries(contexts).reduce((carry, [anchor, rels]) => {

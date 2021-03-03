@@ -1,8 +1,23 @@
-type NormalizedTargetObject = {
-  href: string;
-} & {
+type RegisteredTargetAttributes = {
+  hreflang?: string[];
+  media?: string;
+  type?: string;
+  title?: string[];
+  'title*'?: {
+    value: string;
+    language?: string;
+  }[];
+}
+
+type ExtensionTargetAttributes = {
   [attribute: string]: string | any[];
 };
+
+type NormalizedTargetAttributes = RegisteredTargetAttributes & ExtensionTargetAttributes;
+
+type NormalizedTargetObject = {
+  href: string;
+} & NormalizedTargetAttributes;
 
 type NormalizedContextObject = {
   anchor: string;
@@ -19,6 +34,12 @@ interface LinkInterface {
   rel: string;
   href: string;
   attributes: {
+    hreflang?: string[];
+    media?: string;
+    type?: string;
+    title?: string;
+    'title*'?: string;
+  } & {
     [name: string]: string | any[];
   };
 }

@@ -57,7 +57,12 @@ export function normalize(linkset: LinksetInterface): NormalizedLinkset {
     }
   } = {};
   linkset.elements.forEach(({ anchor, rel, ...target }) => {
-    contexts[anchor][rel].push(target);
+    if (!contexts.hasOwnProperty(anchor)) contexts[anchor] = {};
+    if (!contexts[anchor].hasOwnProperty(rel)) contexts[anchor][rel] = [];
+    contexts[anchor][rel].push({
+      href: target.href,
+      ...target.attributes,
+    });
   });
   return {
     linkset: Object.entries(contexts).reduce((carry, [anchor, rels]) => {

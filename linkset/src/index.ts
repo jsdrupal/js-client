@@ -2,7 +2,7 @@ type NormalizedTargetObject = {
   href: string;
 } & {
   [attribute: string]: string | any[];
-}
+};
 
 type NormalizedContextObject = {
   anchor: string;
@@ -12,15 +12,15 @@ type NormalizedContextObject = {
 
 type NormalizedLinkset = {
   linkset: NormalizedContextObject[];
-}
+};
 
 interface LinkInterface {
   anchor: string;
   rel: string;
   href: string;
   attributes: {
-    [name: string]: string | any[]
-  }
+    [name: string]: string | any[];
+  };
 }
 
 interface LinksetInterface {
@@ -33,10 +33,10 @@ class Link implements LinkInterface {
   public rel: string;
   public href: string;
   public attributes: {
-    [name: string]: string | any[]
+    [name: string]: string | any[];
   };
   constructor(parameters) {
-    const {anchor, rel, href, ...attributes} = parameters;
+    const { anchor, rel, href, ...attributes } = parameters;
     this.anchor = anchor;
     this.rel = rel;
     this.href = href;
@@ -50,15 +50,15 @@ class Linkset implements LinksetInterface {
     this.elements = links;
   }
   hasLinkWithRel(relationType: string): boolean {
-    return this.elements.some(link => link.rel === relationType);
+    return this.elements.some((link) => link.rel === relationType);
   }
 }
 
 export function normalize(linkset: LinksetInterface): NormalizedLinkset {
   const contexts: {
     [anchor: string]: {
-      [rel: string]: object[]
-    }
+      [rel: string]: object[];
+    };
   } = {};
   linkset.elements.forEach(({ anchor, rel, ...target }) => {
     if (!contexts.hasOwnProperty(anchor)) contexts[anchor] = {};
@@ -70,8 +70,8 @@ export function normalize(linkset: LinksetInterface): NormalizedLinkset {
   });
   return {
     linkset: Object.entries(contexts).reduce((carry, [anchor, rels]) => {
-      return [...carry, {anchor, ...rels}];
-    }, [])
+      return [...carry, { anchor, ...rels }];
+    }, []),
   };
 }
 
@@ -81,9 +81,9 @@ export function denormalize(normalized: NormalizedLinkset): LinksetInterface {
     const { anchor, ...rels } = contextObject;
     Object.entries(rels).forEach(([rel, targetObjects]) => {
       targetObjects.forEach((targetObject) => {
-        links.push(new Link({anchor, rel, ...targetObject}));
+        links.push(new Link({ anchor, rel, ...targetObject }));
       });
-    })
+    });
   });
   return new Linkset(links);
 }

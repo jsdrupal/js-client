@@ -6,7 +6,7 @@ test('normalize()', () => {
   const linkset = denormalize(JSON.parse(figure4));
   const json = JSON.stringify(normalize(linkset));
   expect(json).toBe(figure4);
-})
+});
 
 describe('denormalize()', () => {
   const paramFilter = (name, value) => (link) => link[name] === value;
@@ -42,7 +42,7 @@ describe('Linkset', () => {
   it('should be able to indicate whether a link with a particular link relation is in the set of links', () => {
     expect(linkset.hasLinkWithRel('author')).toBe(true);
     expect(linkset.hasLinkWithRel('next')).toBe(false);
-  })
+  });
 });
 
 // vim: set nowrap:

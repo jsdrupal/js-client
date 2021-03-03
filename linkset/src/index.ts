@@ -3,17 +3,17 @@ type InternationalizedValue = {
   language?: string;
 }
 
-interface TargetAttributes {
-  [name: string]: string | string[] | InternationalizedValue[];
-}
-
-interface RegisteredTargetAttributes extends TargetAttributes {
-  hreflang?: string[];
-  media?: string;
-  type?: string;
-  title?: string;
-  'title*'?: InternationalizedValue[];
+interface RegisteredTargetAttributes {
+  readonly hreflang?: string[];
+  readonly media?: string;
+  readonly type?: string;
+  readonly title?: string;
+  readonly 'title*'?: InternationalizedValue[];
 };
+
+interface TargetAttributes extends RegisteredTargetAttributes {
+  readonly [name: string]: string | string[] | InternationalizedValue[];
+}
 
 type NormalizedTargetObject = {
   href: string;
@@ -29,11 +29,29 @@ type NormalizedLinkSet = {
   linkset: NormalizedContextObject[];
 };
 
+interface Normalizable<T> {
+  normalize(): T;
+}
+
 interface LinkInterface {
-  anchor: string;
-  rel: string;
-  href: string;
-  attributes: RegisteredTargetAttributes;
+  readonly anchor: string;
+  readonly rel: string;
+  readonly href: string;
+  readonly attributes: TargetAttributes;
+}
+
+class Link implements LinkInterface {
+  public anchor: string;
+  public rel: string;
+  public href: string;
+  public attributes: TargetAttributes;
+  constructor(parameters) {
+    const { anchor, rel, href, ...attributes } = parameters;
+    this.anchor = anchor;
+    this.rel = rel;
+    this.href = href;
+    this.attributes = attributes;
+  }
 }
 
 interface LinkSetInterface extends Iterable<LinkInterface> {
@@ -42,24 +60,6 @@ interface LinkSetInterface extends Iterable<LinkInterface> {
   hasLinksTo(relationType: string): boolean;
   linksTo(relationType: string): LinkSetInterface;
   linksFrom(anchor: string): LinkSetInterface;
-}
-
-interface Normalizable<T> {
-  normalize(): T;
-}
-
-class Link implements LinkInterface {
-  public anchor: string;
-  public rel: string;
-  public href: string;
-  public attributes: RegisteredTargetAttributes;
-  constructor(parameters) {
-    const { anchor, rel, href, ...attributes } = parameters;
-    this.anchor = anchor;
-    this.rel = rel;
-    this.href = href;
-    this.attributes = attributes;
-  }
 }
 
 class LinkSet implements LinkSetInterface, Normalizable<NormalizedLinkSet> {

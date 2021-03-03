@@ -5,7 +5,6 @@ const figure4 = `{"linkset":[{"anchor":"https://example.org/article/view/7507","
 const section_4_2_4_1 = `{"linkset":[{"anchor":"http://example.net/bar","next":[{"href":"http://example.com/foo","type":"text/html","hreflang":["en","de"]}]}]}`;
 
 describe('denormalize()', () => {
-  const paramFilter = (name, value) => (link) => link[name] === value;
   const linkset = denormalize(JSON.parse(figure4));
 
   it('should return a Linkset with total of 5 links', () => {

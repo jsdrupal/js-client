@@ -55,6 +55,12 @@ describe('LinkSet', () => {
     expect(linkset.linksTo('author').size).toBe(1);
     expect(linkset.linksTo('next').size).toBe(0);
   });
+  it('should be able to return the first link for a given link relation', () => {
+    expect(linkset.linkTo('item').href).toBe('https://example.org/article/7507/item/1');
+  });
+  it('should return undefined if a single link with a given link relation is not available', () => {
+    expect(linkset.linkTo('next')).toBe(undefined);
+  });
   it('should be able to return a new linkset containing only links for a given anchor', () => {
     expect(linkset.linksFrom('https://example.org/article/view/7507').size).toBe(4);
     expect(linkset.linksFrom('https://example.com/links/article/7507').size).toBe(1);

@@ -57,9 +57,9 @@ class Link implements LinkInterface {
 interface LinkSetInterface extends Iterable<LinkInterface> {
   readonly elements: LinkInterface[];
   readonly size: number;
-  hasLinksTo(relationType: string): boolean;
-  linksTo(relationType: string): LinkSetInterface;
+  hasLinkTo(relationType: string): boolean;
   linkTo(relationType: string): LinkInterface | undefined;
+  linksTo(relationType: string): LinkSetInterface;
   linksFrom(anchor: string): LinkSetInterface;
 }
 
@@ -73,14 +73,14 @@ class LinkSet implements LinkSetInterface, Normalizable<NormalizedLinkSet> {
   get size() {
     return this.elements.length;
   }
-  hasLinksTo(relationType: string): boolean {
+  hasLinkTo(relationType: string): boolean {
     return this.elements.some((link) => link.rel === relationType);
-  }
-  linksTo(relationType: string): LinkSetInterface {
-    return new LinkSet(this.elements.filter((link) => link.rel === relationType));
   }
   linkTo(relationType: string): LinkInterface | undefined {
     return this.elements.find((link) => link.rel === relationType);
+  }
+  linksTo(relationType: string): LinkSetInterface {
+    return new LinkSet(this.elements.filter((link) => link.rel === relationType));
   }
   linksFrom(anchor: string): LinkSetInterface {
     return new LinkSet(this.elements.filter((link) => link.anchor === anchor));

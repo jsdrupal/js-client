@@ -54,8 +54,8 @@ describe('denormalize()', () => {
 describe('Linkset', () => {
   const linkset = denormalize(JSON.parse(figure4));
   it('should be able to indicate whether a link with a particular link relation is in the set of links', () => {
-    expect(linkset.hasLinkWithRel('author')).toBe(true);
-    expect(linkset.hasLinkWithRel('next')).toBe(false);
+    expect(linkset.linksTo('author')).toBe(true);
+    expect(linkset.linksTo('next')).toBe(false);
   });
 });
 

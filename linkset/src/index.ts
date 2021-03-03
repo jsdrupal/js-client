@@ -38,7 +38,7 @@ interface LinkInterface {
 
 interface LinksetInterface {
   elements: LinkInterface[];
-  hasLinkWithRel(relationType: string): boolean;
+  linksTo(relationType: string): boolean;
 }
 
 class Link implements LinkInterface {
@@ -60,7 +60,7 @@ class Linkset implements LinksetInterface {
   constructor(links: LinkInterface[]) {
     this.elements = links;
   }
-  hasLinkWithRel(relationType: string): boolean {
+  linksTo(relationType: string): boolean {
     return this.elements.some((link) => link.rel === relationType);
   }
 }

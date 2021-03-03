@@ -25,6 +25,7 @@ interface LinkInterface {
 
 interface LinksetInterface {
   elements: LinkInterface[];
+  hasLinkWithRel(relationType: string): boolean;
 }
 
 class Link implements LinkInterface {
@@ -47,6 +48,9 @@ class Linkset implements LinksetInterface {
   public elements: LinkInterface[];
   constructor(links: LinkInterface[]) {
     this.elements = links;
+  }
+  hasLinkWithRel(relationType: string): boolean {
+    return this.elements.some(link => link.rel === relationType);
   }
 }
 

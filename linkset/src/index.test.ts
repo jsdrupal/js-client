@@ -1,4 +1,4 @@
-import { denormalize } from './index';
+import { parse, denormalize } from './index';
 
 const examples = {
   'Figure 4': `{"linkset":[{"anchor":"https://example.org/article/view/7507","author":[{"href":"https://orcid.org/0000-0002-1825-0097"}],"item":[{"href":"https://example.org/article/7507/item/1","type":"application/pdf"},{"href":"https://example.org/article/7507/item/2","type":"text/csv"}],"cite-as":[{"href":"https://doi.org/10.5555/12345680","title":"AMethodologyfortheEmulationofArchitecture"}]},{"anchor":"https://example.com/links/article/7507","alternate":[{"href":"https://mirror.example.com/links/article/7507","type":"application/linkset"}]}]}`,
@@ -91,5 +91,11 @@ describe('denormalize()', () => {
     expect(link.attributes['title*'][0].language).toBe('de');
   });
 });
+
+describe.each(Object.entries(examples))('parse()', (label, sample) => {
+  test(`${label} does not fail and can be renormalized`, () => {
+    expect(JSON.stringify(parse(sample).normalize())).toBe(sample);
+  })
+})
 
 // vim: set nowrap:

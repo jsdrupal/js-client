@@ -1,43 +1,8 @@
-type InternationalizedValue = {
-  value: string;
-  language?: string;
-}
-
-interface RegisteredTargetAttributes {
-  readonly hreflang?: string[];
-  readonly media?: string;
-  readonly type?: string;
-  readonly title?: string;
-  readonly 'title*'?: InternationalizedValue[];
-};
-
-interface TargetAttributes extends RegisteredTargetAttributes {
-  readonly [name: string]: string | string[] | InternationalizedValue[];
-}
-
-type NormalizedTargetObject = {
-  href: string;
-} & TargetAttributes;
-
-type NormalizedContextObject = {
-  anchor: string;
-} & {
-  [rel: string]: NormalizedTargetObject[];
-};
-
-type NormalizedLinkSet = {
-  linkset: NormalizedContextObject[];
-};
+import NormalizedLinkSet from './types/normalization';
+import { LinkInterface, TargetAttributes } from './types/link';
 
 interface Normalizable<T> {
   normalize(): T;
-}
-
-interface LinkInterface {
-  readonly anchor: string;
-  readonly rel: string;
-  readonly href: string;
-  readonly attributes: TargetAttributes;
 }
 
 class Link implements LinkInterface {
@@ -98,14 +63,14 @@ class LinkSet implements LinkSetInterface, Normalizable<NormalizedLinkSet> {
   normalize(): NormalizedLinkSet {
     const contexts: {
       [anchor: string]: {
-        [rel: string]: NormalizedTargetObject[];
+        [rel: string]: ({href: string} & TargetAttributes)[];
       };
     } = {};
     this.elements.forEach(({ anchor, rel, ...target }) => {
       if (!Object.hasOwnProperty.call(contexts, anchor)) contexts[anchor] = {};
       if (!Object.hasOwnProperty.call(contexts[anchor], rel)) contexts[anchor][rel] = [];
       const { href, attributes } = target;
-      const targetObject: NormalizedTargetObject = { href, ...attributes };
+      const targetObject = { href, ...attributes };
       contexts[anchor][rel].push(targetObject);
     });
     return {
@@ -120,8 +85,8 @@ export function denormalize(normalized: NormalizedLinkSet): LinkSet {
   const links = [];
   normalized.linkset.forEach((contextObject) => {
     const { anchor, ...rels } = contextObject;
-    Object.entries(rels).forEach(([rel, targetObjects]) => {
-      targetObjects.forEach((targetObject) => {
+    Object.keys(rels).forEach((rel) => {
+      contextObject[rel].forEach((targetObject) => {
         links.push(new Link({ anchor, rel, ...targetObject }));
       });
     });

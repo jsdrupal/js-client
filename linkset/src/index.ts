@@ -1,6 +1,6 @@
 import { LinksetInterface as NormalizedLinksetInterface } from './spec/linkset-json';
-import { LinkInterface } from './internal/link';
-import { Linkset, LinksetInterface, NormalizableLinksetInterface } from './internal/linkset';
+import { LinkInterface } from './core/link';
+import { Linkset, LinksetInterface, NormalizableLinksetInterface } from './core/linkset';
 
 /**
  * Denormalizes a set of links into an instance of a Linkset.

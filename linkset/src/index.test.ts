@@ -6,6 +6,33 @@ const examples = {
   'Section 4.2.4.2': `{"linkset":[{"anchor":"http://example.net/bar","next":[{"href":"http://example.com/foo","type":"text/html","hreflang":["en","de"],"title":"Next chapter","title*":[{"value":"nachstes Kapitel","language":"de"}]}]}]}`,
 };
 
+describe('LinkSet', () => {
+  const linkset = denormalize(JSON.parse(examples['Figure 4']));
+  it('should be able to indicate whether a link with a given link relation is in the set of links', () => {
+    expect(linkset.hasLinkTo('author')).toBe(true);
+    expect(linkset.hasLinkTo('next')).toBe(false);
+  });
+  it('should be able to return an array of links for a given link relation', () => {
+    expect(linkset.linksTo('item').size).toBe(2);
+    expect(linkset.linksTo('author').size).toBe(1);
+    expect(linkset.linksTo('next').size).toBe(0);
+  });
+  it('should be able to return the first link for a given link relation', () => {
+    expect(linkset.linkTo('item').href).toBe('https://example.org/article/7507/item/1');
+  });
+  it('should return undefined if a single link with a given link relation is not available', () => {
+    expect(linkset.linkTo('next')).toBe(undefined);
+  });
+  it('should be able to return a new linkset containing only links for a given anchor', () => {
+    expect(linkset.linksFrom('https://example.org/article/view/7507').size).toBe(4);
+    expect(linkset.linksFrom('https://example.com/links/article/7507').size).toBe(1);
+  });
+  it('should be re-normalizable', () => {
+    const linkset = denormalize(JSON.parse(examples['Figure 4']));
+    expect(JSON.stringify(linkset.normalize())).toBe(examples['Figure 4']);
+  });
+});
+
 describe('denormalize()', () => {
   const linkset = denormalize(JSON.parse(examples['Figure 4']));
 
@@ -58,33 +85,6 @@ describe('denormalize()', () => {
     expect(link.attributes.title).toBe('Next chapter');
     expect(link.attributes['title*'][0].value).toBe('nachstes Kapitel');
     expect(link.attributes['title*'][0].language).toBe('de');
-  });
-});
-
-describe('LinkSet', () => {
-  const linkset = denormalize(JSON.parse(examples['Figure 4']));
-  it('should be able to indicate whether a link with a given link relation is in the set of links', () => {
-    expect(linkset.hasLinkTo('author')).toBe(true);
-    expect(linkset.hasLinkTo('next')).toBe(false);
-  });
-  it('should be able to return an array of links for a given link relation', () => {
-    expect(linkset.linksTo('item').size).toBe(2);
-    expect(linkset.linksTo('author').size).toBe(1);
-    expect(linkset.linksTo('next').size).toBe(0);
-  });
-  it('should be able to return the first link for a given link relation', () => {
-    expect(linkset.linkTo('item').href).toBe('https://example.org/article/7507/item/1');
-  });
-  it('should return undefined if a single link with a given link relation is not available', () => {
-    expect(linkset.linkTo('next')).toBe(undefined);
-  });
-  it('should be able to return a new linkset containing only links for a given anchor', () => {
-    expect(linkset.linksFrom('https://example.org/article/view/7507').size).toBe(4);
-    expect(linkset.linksFrom('https://example.com/links/article/7507').size).toBe(1);
-  });
-  it('should be re-normalizable', () => {
-    const linkset = denormalize(JSON.parse(examples['Figure 4']));
-    expect(JSON.stringify(linkset.normalize())).toBe(examples['Figure 4']);
   });
 });
 

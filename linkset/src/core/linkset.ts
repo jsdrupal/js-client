@@ -67,14 +67,12 @@ export interface NormalizableLinksetInterface<T extends NormalizedLinksetInterfa
  * A set of links.
  * @internal
  */
-export class Linkset implements NormalizableLinksetInterface<NormalizedLinksetInterface>, IterableIterator<LinkInterface> {
+export class Linkset implements NormalizableLinksetInterface<NormalizedLinksetInterface> {
   /**
    * {@inheritDoc LinksetInterface.elements}
    */
   readonly elements: LinkInterface[];
-  private iterationIndex: number;
   constructor(links: LinkInterface[]) {
-    this.iterationIndex = 0;
     this.elements = links;
   }
   /**
@@ -108,20 +106,20 @@ export class Linkset implements NormalizableLinksetInterface<NormalizedLinksetIn
     return new Linkset(this.elements.filter((link) => link.anchor === anchor));
   }
   /**
-   * Implements the IterableIterator interface.
+   * Implements the iterable protocol.
    */
-  [Symbol.iterator](): IterableIterator<LinkInterface> {
-    return this;
-  }
-  /**
-   * Implements the IterableIterator interface.
-   */
-  next(): IteratorResult<LinkInterface> {
-    if (this.iterationIndex < this.elements.length) {
-      return {value: this.elements[this.iterationIndex++], done: false};
-    } else {
-      return {value: undefined, done: true};
-    }
+  [Symbol.iterator](): Iterator<LinkInterface> {
+    const elems = this.elements;
+    let pointer = 0;
+    return {
+      next(): IteratorResult<LinkInterface> {
+        if (pointer < elems.length) {
+          return {value: elems[pointer++], done: false};
+        } else {
+          return {value: undefined, done: true};
+        }
+      }
+    };
   }
   /**
    * {@inheritDoc NormalizableLinksetInterface.normalize}

@@ -27,6 +27,10 @@ describe('Linkset', () => {
     expect(linkset.linksFrom('https://example.org/article/view/7507').size).toBe(4);
     expect(linkset.linksFrom('https://example.com/links/article/7507').size).toBe(1);
   });
+  it('should be iterable and re-iterable', () => {
+    expect(Array.from(linkset).length).toBe(5);
+    expect(Array.from(linkset).length).toBe(5);
+  });
   it('should be re-normalizable', () => {
     const linkset = denormalize(JSON.parse(examples['Figure 4']));
     expect(JSON.stringify(linkset.normalize())).toBe(examples['Figure 4']);

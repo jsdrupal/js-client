@@ -9,9 +9,9 @@ import { LinksetInterface as NormalizedLinksetInterface, TargetObject } from '..
  * For example, one might prompt for credentials if an `authenticate` link is
  * present and then start a user session:
  * ```
- * if (linkset.linksFrom(window.location).hasLinkTo('authenticate')) {
+ * if (linkset.linksFrom(window.location.href).hasLinkTo('authenticate')) {
  *   // ... get user credentials ...
- *   fetch(linkset.linkTo('authenticate'), {
+ *   fetch(linkset.linkTo('authenticate').href, {
  *     method: 'POST',
  *     body: JSON.stringify(credentials),
  *     credentials: 'same-origin',

@@ -1,13 +1,13 @@
 import { denormalize } from './index';
 
-const figure4 = `{"linkset":[{"anchor":"https://example.org/article/view/7507","author":[{"href":"https://orcid.org/0000-0002-1825-0097"}],"item":[{"href":"https://example.org/article/7507/item/1","type":"application/pdf"},{"href":"https://example.org/article/7507/item/2","type":"text/csv"}],"cite-as":[{"href":"https://doi.org/10.5555/12345680","title":"AMethodologyfortheEmulationofArchitecture"}]},{"anchor":"https://example.com/links/article/7507","alternate":[{"href":"https://mirror.example.com/links/article/7507","type":"application/linkset"}]}]}`;
-
-const section_4_2_4_1 = `{"linkset":[{"anchor":"http://example.net/bar","next":[{"href":"http://example.com/foo","type":"text/html","hreflang":["en","de"]}]}]}`;
-
-const section_4_2_4_2 = `{"linkset":[{"anchor":"http://example.net/bar","next":[{"href":"http://example.com/foo","type":"text/html","hreflang":["en","de"],"title":"Next chapter","title*":[{"value":"nachstes Kapitel","language":"de"}]}]}]}`
+const examples = {
+  'Figure 4': `{"linkset":[{"anchor":"https://example.org/article/view/7507","author":[{"href":"https://orcid.org/0000-0002-1825-0097"}],"item":[{"href":"https://example.org/article/7507/item/1","type":"application/pdf"},{"href":"https://example.org/article/7507/item/2","type":"text/csv"}],"cite-as":[{"href":"https://doi.org/10.5555/12345680","title":"AMethodologyfortheEmulationofArchitecture"}]},{"anchor":"https://example.com/links/article/7507","alternate":[{"href":"https://mirror.example.com/links/article/7507","type":"application/linkset"}]}]}`,
+  'Section 4.2.4.1': `{"linkset":[{"anchor":"http://example.net/bar","next":[{"href":"http://example.com/foo","type":"text/html","hreflang":["en","de"]}]}]}`,
+  'Section 4.2.4.2': `{"linkset":[{"anchor":"http://example.net/bar","next":[{"href":"http://example.com/foo","type":"text/html","hreflang":["en","de"],"title":"Next chapter","title*":[{"value":"nachstes Kapitel","language":"de"}]}]}]}`,
+};
 
 describe('denormalize()', () => {
-  const linkset = denormalize(JSON.parse(figure4));
+  const linkset = denormalize(JSON.parse(examples['Figure 4']));
 
   it('should return a Linkset with total of 5 links', () => {
     expect(linkset.size).toBe(5);
@@ -34,7 +34,7 @@ describe('denormalize()', () => {
   });
 
   it('should be able to denormalize registered target attributes', () => {
-    const actual = denormalize(JSON.parse(section_4_2_4_1));
+    const actual = denormalize(JSON.parse(examples['Section 4.2.4.1']));
     expect(actual.size).toBe(1);
     const link = Array.from(actual).pop();
     expect(link.anchor).toBe('http://example.net/bar');
@@ -46,7 +46,7 @@ describe('denormalize()', () => {
   });
 
   it('should be able to denormalize internationalized target attributes', () => {
-    const actual = denormalize(JSON.parse(section_4_2_4_2));
+    const actual = denormalize(JSON.parse(examples['Section 4.2.4.2']));
     expect(actual.size).toBe(1);
     const link = Array.from(actual).pop();
     expect(link.anchor).toBe('http://example.net/bar');
@@ -62,7 +62,7 @@ describe('denormalize()', () => {
 });
 
 describe('LinkSet', () => {
-  const linkset = denormalize(JSON.parse(figure4));
+  const linkset = denormalize(JSON.parse(examples['Figure 4']));
   it('should be able to indicate whether a link with a given link relation is in the set of links', () => {
     expect(linkset.hasLinkTo('author')).toBe(true);
     expect(linkset.hasLinkTo('next')).toBe(false);
@@ -83,8 +83,8 @@ describe('LinkSet', () => {
     expect(linkset.linksFrom('https://example.com/links/article/7507').size).toBe(1);
   });
   it('should be re-normalizable', () => {
-    const linkset = denormalize(JSON.parse(figure4));
-    expect(JSON.stringify(linkset.normalize())).toBe(figure4);
+    const linkset = denormalize(JSON.parse(examples['Figure 4']));
+    expect(JSON.stringify(linkset.normalize())).toBe(examples['Figure 4']);
   });
 });
 

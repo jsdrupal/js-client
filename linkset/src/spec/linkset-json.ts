@@ -20,6 +20,6 @@ interface ContextObject {
 /**
  * An object that conforms to the application/linkset+json media type spec.
  */
-export interface LinkSetInterface {
+export interface LinksetInterface {
   linkset: ContextObject[];
 };

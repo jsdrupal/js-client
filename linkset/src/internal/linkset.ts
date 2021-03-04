@@ -1,5 +1,5 @@
 import { LinkInterface, Link } from './link';
-import { LinkSetInterface as NormalizedLinkSetInterface, TargetObject } from '../spec/linkset-json'
+import { LinksetInterface as NormalizedLinksetInterface, TargetObject } from '../spec/linkset-json'
 
 /**
  * A set of links and useful link utilities.
@@ -19,7 +19,7 @@ import { LinkSetInterface as NormalizedLinkSetInterface, TargetObject } from '..
  * }
  * ```
  */
-export interface LinkSetInterface extends Iterable<LinkInterface> {
+export interface LinksetInterface extends Iterable<LinkInterface> {
   /**
    * A read-only array of links.
    */
@@ -42,12 +42,12 @@ export interface LinkSetInterface extends Iterable<LinkInterface> {
    * Get a subset of links containing only the links with the given relation.
    * @returns A new linkset. Empty if no links have the given relation type.
    */
-  linksTo(relationType: string): LinkSetInterface;
+  linksTo(relationType: string): LinksetInterface;
   /**
    * Get a subset of links with the given context IRI.
    * @returns A new linkset. Empty if no links have the given context.
    */
-  linksFrom(anchor: string): LinkSetInterface;
+  linksFrom(anchor: string): LinksetInterface;
 }
 
 /**
@@ -56,7 +56,7 @@ export interface LinkSetInterface extends Iterable<LinkInterface> {
  *   application/linkset+json media type specification.
  * @see {@link https://tools.ietf.org/html/draft-ietf-httpapi-linkset-00|draft-ietf-httpapi-linkset-00: Linkset}
  */
-export interface NormalizableLinkSetInterface<T extends NormalizedLinkSetInterface> extends LinkSetInterface {
+export interface NormalizableLinksetInterface<T extends NormalizedLinksetInterface> extends LinksetInterface {
   /**
    * {@inheritDoc Normalizable.normalize}
    */
@@ -67,9 +67,9 @@ export interface NormalizableLinkSetInterface<T extends NormalizedLinkSetInterfa
  * A set of links.
  * @internal
  */
-export class LinkSet implements NormalizableLinkSetInterface<NormalizedLinkSetInterface>, IterableIterator<LinkInterface> {
+export class Linkset implements NormalizableLinksetInterface<NormalizedLinksetInterface>, IterableIterator<LinkInterface> {
   /**
-   * {@inheritDoc LinkSetInterface.elements}
+   * {@inheritDoc LinksetInterface.elements}
    */
   readonly elements: LinkInterface[];
   private iterationIndex: number;
@@ -78,34 +78,34 @@ export class LinkSet implements NormalizableLinkSetInterface<NormalizedLinkSetIn
     this.elements = links;
   }
   /**
-   * {@inheritDoc LinkSetInterface.size}
+   * {@inheritDoc LinksetInterface.size}
    */
   get size(): number {
     return this.elements.length;
   }
   /**
-   * {@inheritDoc LinkSetInterface.hasLinkTo}
+   * {@inheritDoc LinksetInterface.hasLinkTo}
    */
   hasLinkTo(relationType: string): boolean {
     return this.elements.some((link) => link.rel === relationType);
   }
   /**
-   * {@inheritDoc LinkSetInterface.linkTo}
+   * {@inheritDoc LinksetInterface.linkTo}
    */
   linkTo(relationType: string): LinkInterface | undefined {
     return this.elements.find((link) => link.rel === relationType);
   }
   /**
-   * {@inheritDoc LinkSetInterface.linksTo}
+   * {@inheritDoc LinksetInterface.linksTo}
    */
-  linksTo(relationType: string): LinkSetInterface {
-    return new LinkSet(this.elements.filter((link) => link.rel === relationType));
+  linksTo(relationType: string): LinksetInterface {
+    return new Linkset(this.elements.filter((link) => link.rel === relationType));
   }
   /**
-   * {@inheritDoc LinkSetInterface.linksFrom}
+   * {@inheritDoc LinksetInterface.linksFrom}
    */
-  linksFrom(anchor: string): LinkSetInterface {
-    return new LinkSet(this.elements.filter((link) => link.anchor === anchor));
+  linksFrom(anchor: string): LinksetInterface {
+    return new Linkset(this.elements.filter((link) => link.anchor === anchor));
   }
   /**
    * Implements the IterableIterator interface.
@@ -124,9 +124,9 @@ export class LinkSet implements NormalizableLinkSetInterface<NormalizedLinkSetIn
     }
   }
   /**
-   * {@inheritDoc NormalizableLinkSetInterface.normalize}
+   * {@inheritDoc NormalizableLinksetInterface.normalize}
    */
-  normalize(): NormalizedLinkSetInterface {
+  normalize(): NormalizedLinksetInterface {
     const contexts: {
       [anchor: string]: {
         [rel: string]: TargetObject[];
@@ -149,9 +149,9 @@ export class LinkSet implements NormalizableLinkSetInterface<NormalizedLinkSetIn
    * Denormalizes a linkset.
    * @param normalized - An object conforming to the application/linkset+json
    *   media type specification.
-   * @returns A new LinkSet.
+   * @returns A new Linkset.
    */
-  static from(normalized: NormalizedLinkSetInterface): LinkSet {
+  static from(normalized: NormalizedLinksetInterface): Linkset {
     const links = [];
     normalized.linkset.forEach((contextObject) => {
       const { anchor, ...rels } = contextObject;
@@ -161,6 +161,6 @@ export class LinkSet implements NormalizableLinkSetInterface<NormalizedLinkSetIn
         });
       });
     });
-    return new LinkSet(links);
+    return new Linkset(links);
   }
 }

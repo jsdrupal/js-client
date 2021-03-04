@@ -1,19 +1,19 @@
-import { LinkSetInterface as NormalizedLinkSetInterface } from './spec/linkset-json';
+import { LinksetInterface as NormalizedLinksetInterface } from './spec/linkset-json';
 import { LinkInterface } from './internal/link';
-import { LinkSet, LinkSetInterface, NormalizableLinkSetInterface } from './internal/linkset';
+import { Linkset, LinksetInterface, NormalizableLinksetInterface } from './internal/linkset';
 
 /**
- * Denormalizes a set of links into an instance of a LinkSet.
- * {@inheritDoc LinkSet.from}
+ * Denormalizes a set of links into an instance of a Linkset.
+ * {@inheritDoc Linkset.from}
  */
-function denormalize(normalized: NormalizedLinkSetInterface): LinkSet {
-  return LinkSet.from(normalized);
+function denormalize(normalized: NormalizedLinksetInterface): Linkset {
+  return Linkset.from(normalized);
 }
 
 export {
   denormalize,
   LinkInterface,
-  LinkSetInterface,
-  NormalizedLinkSetInterface,
-  NormalizableLinkSetInterface,
+  LinksetInterface,
+  NormalizedLinksetInterface,
+  NormalizableLinksetInterface,
 };

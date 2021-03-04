@@ -6,7 +6,7 @@ const examples = {
   'Section 4.2.4.2': `{"linkset":[{"anchor":"http://example.net/bar","next":[{"href":"http://example.com/foo","type":"text/html","hreflang":["en","de"],"title":"Next chapter","title*":[{"value":"nachstes Kapitel","language":"de"}]}]}]}`,
 };
 
-describe('LinkSet', () => {
+describe('Linkset', () => {
   const linkset = denormalize(JSON.parse(examples['Figure 4']));
   it('should be able to indicate whether a link with a given link relation is in the set of links', () => {
     expect(linkset.hasLinkTo('author')).toBe(true);

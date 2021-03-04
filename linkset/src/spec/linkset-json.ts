@@ -23,12 +23,3 @@ interface ContextObject {
 export interface LinkSetInterface {
   linkset: ContextObject[];
 };
-
-/**
- * Use for normalizing an object into a serializable object.
- * @internal
- * @typeParam T - A type that describes the result of normalization.
- */
-export interface Normalizable<T> {
-  normalize(): T;
-}

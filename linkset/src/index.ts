@@ -1,4 +1,4 @@
-import { LinkSetInterface as NormalizedLinkSetInterface } from './internal/normalization';
+import { LinkSetInterface as NormalizedLinkSetInterface } from './spec/linkset-json';
 import { LinkInterface } from './internal/link';
 import { LinkSet, LinkSetInterface, NormalizableLinkSetInterface } from './internal/linkset';
 
@@ -14,5 +14,6 @@ export {
   denormalize,
   LinkInterface,
   LinkSetInterface,
+  NormalizedLinkSetInterface,
   NormalizableLinkSetInterface,
 };

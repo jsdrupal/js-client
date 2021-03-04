@@ -1,5 +1,5 @@
 import { LinkInterface, Link } from './link';
-import { LinkSetInterface as NormalizedLinkSetInterface, TargetObject, Normalizable } from './normalization'
+import { LinkSetInterface as NormalizedLinkSetInterface, TargetObject } from '../spec/linkset-json'
 
 /**
  * A set of links and useful link utilities.
@@ -51,12 +51,12 @@ export interface LinkSetInterface extends Iterable<LinkInterface> {
 }
 
 /**
- * {@inheritDoc LinkSetInterface}
+ * Use for normalizing an object into a serializable object.
  * @typeParam T - An interface representing an object that conforms to the
  *   application/linkset+json media type specification.
  * @see {@link https://tools.ietf.org/html/draft-ietf-httpapi-linkset-00|draft-ietf-httpapi-linkset-00: Linkset}
  */
-export interface NormalizableLinkSetInterface<T extends NormalizedLinkSetInterface> extends Normalizable<T>, LinkSetInterface {
+export interface NormalizableLinkSetInterface<T extends NormalizedLinkSetInterface> extends LinkSetInterface {
   /**
    * {@inheritDoc Normalizable.normalize}
    */

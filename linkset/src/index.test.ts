@@ -4,6 +4,8 @@ const figure4 = `{"linkset":[{"anchor":"https://example.org/article/view/7507","
 
 const section_4_2_4_1 = `{"linkset":[{"anchor":"http://example.net/bar","next":[{"href":"http://example.com/foo","type":"text/html","hreflang":["en","de"]}]}]}`;
 
+const section_4_2_4_2 = `{"linkset":[{"anchor":"http://example.net/bar","next":[{"href":"http://example.com/foo","type":"text/html","hreflang":["en","de"],"title":"Next chapter","title*":[{"value":"nachstes Kapitel","language":"de"}]}]}]}`
+
 describe('denormalize()', () => {
   const linkset = denormalize(JSON.parse(figure4));
 
@@ -41,6 +43,21 @@ describe('denormalize()', () => {
     expect(link.attributes.type).toBe('text/html');
     expect(link.attributes.hreflang[0]).toBe('en');
     expect(link.attributes.hreflang[1]).toBe('de');
+  });
+
+  it('should be able to denormalize internationalized target attributes', () => {
+    const actual = denormalize(JSON.parse(section_4_2_4_2));
+    expect(actual.size).toBe(1);
+    const link = Array.from(actual).pop();
+    expect(link.anchor).toBe('http://example.net/bar');
+    expect(link.rel).toBe('next');
+    expect(link.href).toBe('http://example.com/foo');
+    expect(link.attributes.type).toBe('text/html');
+    expect(link.attributes.hreflang[0]).toBe('en');
+    expect(link.attributes.hreflang[1]).toBe('de');
+    expect(link.attributes.title).toBe('Next chapter');
+    expect(link.attributes['title*'][0].value).toBe('nachstes Kapitel');
+    expect(link.attributes['title*'][0].language).toBe('de');
   });
 });
 

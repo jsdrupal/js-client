@@ -12,8 +12,8 @@
     "@rollup/plugin-typescript": "^8.2.0",
     "@types/node": "^14.14.31",
     "@types/node-fetch": "^2.5.8",
-    "@typescript-eslint/eslint-plugin": "^4.15.2",
-    "@typescript-eslint/parser": "^4.15.2",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
@@ -28,18 +28,17 @@
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
     "extends": [
       "eslint:recommended",
       "plugin:@typescript-eslint/recommended",
-      "prettier/@typescript-eslint",
-      "plugin:prettier/recommended"
+      "prettier"
     ],
     "parserOptions": {
       "ecmaVersion": "2018",
       "sourceType": "module"
-    },
-    "rules": {
-      "prettier/prettier": "error"
     }
   }
 }

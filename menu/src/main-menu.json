@@ -1,0 +1,27 @@
+{
+  "linkset": [
+    {
+      "anchor": "/system/menu/main/linkset",
+      "item": [
+        {
+          "href": "/",
+          "title": "Home",
+          "drupal-menu-hierarchy": [".000"],
+          "drupal-menu-machine-name": ["main"]
+        },
+        {
+          "href": "/about",
+          "title": "About us",
+          "drupal-menu-hierarchy": [".001"],
+          "drupal-menu-machine-name": ["main"]
+        },
+        {
+          "href": "/about/name",
+          "title": "Our name",
+          "drupal-menu-hierarchy": [".001.000"],
+          "drupal-menu-machine-name": ["main"]
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,6 @@ export default {
   output: {
     exports: 'named',
     dir: 'dist',
-    format: 'cjs',
   },
   plugins: [typescript()],
 };

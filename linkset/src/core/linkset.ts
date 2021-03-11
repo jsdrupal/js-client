@@ -1,5 +1,6 @@
-import { LinkInterface, Link } from './link';
-import { LinksetInterface as NormalizedLinksetInterface, TargetObject } from '../spec/linkset-json'
+import { Link } from './link';
+import type { LinkInterface } from './link';
+import type { LinksetInterface as NormalizedLinksetInterface, TargetObject } from '../spec/linkset-json'
 
 /**
  * A set of links and useful link utilities.
@@ -72,14 +73,10 @@ export class Linkset implements NormalizableLinksetInterface<NormalizedLinksetIn
    * {@inheritDoc LinksetInterface.elements}
    */
   readonly elements: LinkInterface[];
+  readonly size: number;
   constructor(links: LinkInterface[]) {
     this.elements = links;
-  }
-  /**
-   * {@inheritDoc LinksetInterface.size}
-   */
-  get size(): number {
-    return this.elements.length;
+    this.size = links.length;
   }
   /**
    * {@inheritDoc LinksetInterface.hasLinkTo}

@@ -24,7 +24,7 @@ interface RegisteredTargetAttributes {
  * An object that represents a link's target attributes.
  * @see {@link https://tools.ietf.org/html/draft-ietf-httpapi-linkset-00#section-4.2.4|draft-ietf-httpapi-linkset-00: Linkset §4.2.4}
  */
-interface TargetAttributes extends RegisteredTargetAttributes {
+export interface TargetAttributes extends RegisteredTargetAttributes {
   readonly [name: string]: string | string[] | InternationalizedValue[];
 }
 

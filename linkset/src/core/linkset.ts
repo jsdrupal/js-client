@@ -1,4 +1,4 @@
-import { Link } from './link';
+import { Link, TargetAttributeValue, InternationalizedValue } from './link';
 import type { LinkInterface } from './link';
 import type { LinksetInterface as NormalizedLinksetInterface, TargetObject } from '../spec/linkset-json'
 
@@ -49,6 +49,16 @@ export interface LinksetInterface extends Iterable<LinkInterface> {
    * @returns A new linkset. Empty if no links have the given context.
    */
   linksFrom(anchor: string): LinksetInterface;
+  /**
+   * Get a subset of links with the given attribute.
+   * @returns A new linkset. Empty if no links have the given attribute.
+   */
+  linksWithAttribute(name: string): LinksetInterface;
+  /**
+   * Get a subset of links with the given attribute.
+   * @returns A new linkset. Empty if no links have the given attribute.
+   */
+  linksWithAttributeValue(name: string, value: TargetAttributeValue): LinksetInterface;
 }
 
 /**
@@ -93,14 +103,29 @@ export class Linkset implements NormalizableLinksetInterface<NormalizedLinksetIn
   /**
    * {@inheritDoc LinksetInterface.linksTo}
    */
-  linksTo(relationType: string): LinksetInterface {
+  linksTo(relationType: string): Linkset {
     return new Linkset(this.elements.filter((link) => link.rel === relationType));
   }
   /**
    * {@inheritDoc LinksetInterface.linksFrom}
    */
-  linksFrom(anchor: string): LinksetInterface {
+  linksFrom(anchor: string): Linkset {
     return new Linkset(this.elements.filter((link) => link.anchor === anchor));
+  }
+  /**
+   * {@inheritdoc LinksetInterface.linksWithAttribute}
+   */
+  linksWithAttribute(name: string): Linkset {
+    return new Linkset(this.elements.filter((link) => Object.prototype.hasOwnProperty.call(link.attributes, name)));
+  }
+  /**
+   * {@inheritdoc LinksetInterface.linksWithAttributeValue}
+   */
+  linksWithAttributeValue(name: string, value: TargetAttributeValue): Linkset {
+    return new Linkset(this.linksWithAttribute(name).elements.filter((link) => {
+      const values = (Array.isArray(link.attributes[name]) ? link.attributes[name] : [link.attributes[name]]) as Array<TargetAttributeValue>;
+      return values.some((v) => isAttributeEqual(v, value));
+    }));
   }
   /**
    * Implements the iterable protocol.
@@ -158,4 +183,24 @@ export class Linkset implements NormalizableLinksetInterface<NormalizedLinksetIn
     });
     return new Linkset(links);
   }
+}
+
+/**
+ * Checks target attribute values for equality, respecting that a value may be internationalized.
+ * @param a - A target attribute value.
+ * @param b - Another target attribute value.
+ * @returns boolean
+ *   True if both values are strictly equivalent. If the input values are internationalized, both the value and language
+ *   must match.
+ * {@see {@link TargetAttributeValue}}
+ */
+function isAttributeEqual(a: TargetAttributeValue, b: TargetAttributeValue): boolean {
+  if (typeof a !== typeof b) {
+    return false;
+  }
+  if (typeof a === 'string' && typeof b === 'string') {
+    return a === b;
+  }
+  return (a as InternationalizedValue).value === (a as InternationalizedValue).value
+    && (a as InternationalizedValue).language === (a as InternationalizedValue).language;
 }

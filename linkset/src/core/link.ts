@@ -2,10 +2,16 @@
  * A value object that represents a single, internationalized target attribute.
  * @see {@link https://tools.ietf.org/html/draft-ietf-httpapi-linkset-00#section-4.2.4.2|draft-ietf-httpapi-linkset-00: Linkset §4.2.4.2}
  */
-type InternationalizedValue = {
+export type InternationalizedValue = {
   value: string;
   language?: string;
 }
+
+/**
+ * An object that represent a single target attribute value.
+ * @see {@link https://tools.ietf.org/html/draft-ietf-httpapi-linkset-00#section-4.2.4|draft-ietf-httpapi-linkset-00: Linkset §4.2.4}
+ */
+export type TargetAttributeValue = string | InternationalizedValue;
 
 /**
  * An object that represents a subset of a link's target attributes.
@@ -25,7 +31,7 @@ interface RegisteredTargetAttributes {
  * @see {@link https://tools.ietf.org/html/draft-ietf-httpapi-linkset-00#section-4.2.4|draft-ietf-httpapi-linkset-00: Linkset §4.2.4}
  */
 export interface TargetAttributes extends RegisteredTargetAttributes {
-  readonly [name: string]: string | string[] | InternationalizedValue[];
+  readonly [name: string]: TargetAttributeValue | TargetAttributeValue[];
 }
 
 /**

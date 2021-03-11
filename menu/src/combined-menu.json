@@ -1,0 +1,31 @@
+{
+  "linkset": [{
+    "anchor": "/",
+    "item": [{
+      "href": "/",
+      "title": "Home",
+      "drupal-menu-hierarchy": [".000"],
+      "drupal-menu-machine-name": ["main"]
+    }, {
+      "href": "/about",
+      "title": "About us",
+      "drupal-menu-hierarchy": [".001"] ,
+      "drupal-menu-machine-name": ["main"]
+    }, {
+      "href": "/about/name",
+      "title": "Our name",
+      "drupal-menu-hierarchy": [".001.000"],
+      "drupal-menu-machine-name": ["main"]
+    }, {
+      "href": "/user/logout",
+      "title": "Log out",
+      "drupal-menu-hierarchy": [".001"],
+      "drupal-menu-machine-name": ["account"]
+    }, {
+      "href": "/user",
+      "title": "My profile",
+      "drupal-menu-hierarchy": [".000"],
+      "drupal-menu-machine-name": ["account"]
+    }]
+  }]
+}

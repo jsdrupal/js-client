@@ -5,6 +5,7 @@
     "docs",
     "client",
     "linkset",
+    "menu",
     "example-node"
   ],
   "scripts": {

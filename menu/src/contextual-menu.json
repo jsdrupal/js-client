@@ -1,0 +1,34 @@
+{
+  "linkset": [{
+    "anchor": "https://www.example.com/featured-articles",
+    "authenticated-as": [{
+      "href": "/user",
+      "title": "My profile",
+      "drupal-menu-hierarchy": [".001"],
+      "drupal-menu-machine-name": ["account"]
+    }],
+    "item": [{
+      "href": "/",
+      "title": "Home",
+      "drupal-menu-hierarchy": [".000"],
+      "drupal-menu-machine-name": ["main"]
+    }, {
+      "href": "/about",
+      "title": "About us",
+      "drupal-menu-hierarchy": [".002"] ,
+      "drupal-menu-machine-name": ["main"]
+    }],
+    "logout": [{
+      "href": "/user/logout",
+      "title": "Log out",
+      "drupal-menu-hierarchy": [".000"],
+      "drupal-menu-machine-name": ["account"]
+    }],
+    "self": [{
+      "href": "/featured-articles",
+      "title": "Featured articles",
+      "drupal-menu-hierarchy": [".001"],
+      "drupal-menu-machine-name": ["main"]
+    }]
+  }]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@jsdrupal/menu",
+  "version": "0.0.0",
+  "main": "index.js",
+  "type": "module",
+  "repository": "git://github.com/jsdrupal/js-client.git",
+  "scripts": {
+    "build": "rimraf dist && rollup -c && mv dist/index.js index.js && rimraf dist",
+    "eslint": "eslint . --ext .ts --max-warnings=0 --ignore-path=.gitignore",
+    "eslintci": "eslint -o ../reports/eslint/menu.json -f json",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@jsdrupal/linkset": "workspace:linkset",
+    "@rollup/plugin-typescript": "^8.2.0",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.33",
+    "@types/node-fetch": "^2.5.8",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.40.0",
+    "ts-jest": "^26.5.2",
+    "ts-node": "^9.1.1",
+    "tslib": "^2.1.0",
+    "typescript": "^4.1.2"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
+    ]
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "transform": {},
+    "testEnvironment": "node"
+  }
+}
